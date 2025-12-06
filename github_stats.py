@@ -52,7 +52,7 @@ class Queries(object):
             if result is not None:
                 return result
         except:
-            print("aiohttp failed for GraphQL query")
+            print("aiohttp failed for GraphQL query", flush=True)
             # Fall back on non-async requests
             async with self.semaphore:
                 r_requests = requests.post(
@@ -107,7 +107,7 @@ class Queries(object):
                 if result is not None:
                     return result
             except:
-                print("aiohttp failed for rest query")
+                print("aiohttp failed for rest query", flush=True)
                 # Fall back on non-async requests
                 async with self.semaphore:
                     r_requests = requests.get(
@@ -118,16 +118,16 @@ class Queries(object):
                     if r_requests.status_code == 202:
                         if attempt < max_retries - 1:
                             delay = min(base_delay * (1.5 ** attempt), max_delay)
-                            print(f"⏳ Path '{path}' returned 202 (processing). Retrying in {delay:.1f}s... (attempt {attempt + 1}/{max_retries})")
+                            print(f"⏳ Path '{path}' returned 202 (processing). Retrying in {delay:.1f}s... (attempt {attempt + 1}/{max_retries})", flush=True)
                             await asyncio.sleep(delay)
                             continue
                         else:
-                            print(f"⚠️  Max retries reached for '{path}'. Data will be incomplete.")
+                            print(f"⚠️  Max retries reached for '{path}'. Data will be incomplete.", flush=True)
                             return dict()
                     elif r_requests.status_code == 200:
                         return r_requests.json()
         
-        print("There were too many 202s. Data for this repository will be incomplete.")
+        print("There were too many 202s. Data for this repository will be incomplete.", flush=True)
         return dict()
 
     @staticmethod
@@ -325,7 +325,7 @@ Languages:
         page = 0
         while True:
             page += 1
-            print(f"📦 Fetching repositories (page {page})...")
+            print(f"📦 Fetching repositories (page {page})...", flush=True)
             raw_results = await self.queries.query(
                 Queries.repos_overview(
                     owned_cursor=next_owned, contrib_cursor=next_contrib
@@ -389,7 +389,7 @@ Languages:
                     "endCursor", next_contrib
                 )
             else:
-                print(f"✅ Fetched {len(self._repos)} repositories")
+                print(f"✅ Fetched {len(self._repos)} repositories", flush=True)
                 break
 
         # TODO: Improve languages to scale by number of contributions to
@@ -473,7 +473,7 @@ Languages:
             return self._total_contributions
 
         self._total_contributions = 0
-        print("📊 Fetching contribution years...")
+        print("📊 Fetching contribution years...", flush=True)
         years = (
             (await self.queries.query(Queries.contrib_years()))
             .get("data", {})
@@ -481,8 +481,8 @@ Languages:
             .get("contributionsCollection", {})
             .get("contributionYears", [])
         )
-        print(f"📅 Found contributions across {len(years)} years")
-        print("📈 Calculating total contributions...")
+        print(f"📅 Found contributions across {len(years)} years", flush=True)
+        print("📈 Calculating total contributions...", flush=True)
         by_year = (
             (await self.queries.query(Queries.all_contribs(years)))
             .get("data", {})
@@ -493,7 +493,7 @@ Languages:
             self._total_contributions += year.get("contributionCalendar", {}).get(
                 "totalContributions", 0
             )
-        print(f"✅ Total contributions: {self._total_contributions:,}")
+        print(f"✅ Total contributions: {self._total_contributions:,}", flush=True)
         return cast(int, self._total_contributions)
 
     @property
@@ -507,10 +507,10 @@ Languages:
         deletions = 0
         repos_list = list(await self.repos)
         total_repos = len(repos_list)
-        print(f"📝 Fetching line changes from {total_repos} repositories...")
+        print(f"📝 Fetching line changes from {total_repos} repositories...", flush=True)
         for idx, repo in enumerate(repos_list, 1):
             if idx % 5 == 0 or idx == total_repos:
-                print(f"   Progress: {idx}/{total_repos} repositories processed")
+                print(f"   Progress: {idx}/{total_repos} repositories processed", flush=True)
             r = await self.queries.query_rest(f"/repos/{repo}/stats/contributors")
             for author_obj in r:
                 # Handle malformed response from the API by skipping this repo
@@ -527,7 +527,7 @@ Languages:
                     deletions += week.get("d", 0)
 
         self._lines_changed = (additions, deletions)
-        print(f"✅ Lines changed: +{additions:,} / -{deletions:,}")
+        print(f"✅ Lines changed: +{additions:,} / -{deletions:,}", flush=True)
         return self._lines_changed
 
     @property
@@ -541,14 +541,14 @@ Languages:
 
         total = 0
         repos_list = list(await self.repos)
-        print(f"👀 Fetching view counts from {len(repos_list)} repositories...")
+        print(f"👀 Fetching view counts from {len(repos_list)} repositories...", flush=True)
         for repo in repos_list:
             r = await self.queries.query_rest(f"/repos/{repo}/traffic/views")
             for view in r.get("views", []):
                 total += view.get("count", 0)
 
         self._views = total
-        print(f"✅ Total views (last 14 days): {total:,}")
+        print(f"✅ Total views (last 14 days): {total:,}", flush=True)
         return total
 
 
