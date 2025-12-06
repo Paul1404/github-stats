@@ -73,7 +73,11 @@ class Queries(object):
         :return: deserialized REST JSON output
         """
 
-        for _ in range(60):
+        max_retries = 10  # Reduced from 60
+        base_delay = 2
+        max_delay = 10
+        
+        for attempt in range(max_retries):
             headers = {
                 "Authorization": f"token {self.access_token}",
             }
@@ -89,10 +93,15 @@ class Queries(object):
                         params=tuple(params.items()),
                     )
                 if r_async.status == 202:
-                    # print(f"{path} returned 202. Retrying...")
-                    print(f"A path returned 202. Retrying...")
-                    await asyncio.sleep(2)
-                    continue
+                    if attempt < max_retries - 1:
+                        # Exponential backoff with jitter
+                        delay = min(base_delay * (1.5 ** attempt), max_delay)
+                        print(f"⏳ Path '{path}' returned 202 (processing). Retrying in {delay:.1f}s... (attempt {attempt + 1}/{max_retries})")
+                        await asyncio.sleep(delay)
+                        continue
+                    else:
+                        print(f"⚠️  Max retries reached for '{path}'. Data will be incomplete.")
+                        return dict()
 
                 result = await r_async.json()
                 if result is not None:
@@ -107,12 +116,17 @@ class Queries(object):
                         params=tuple(params.items()),
                     )
                     if r_requests.status_code == 202:
-                        print(f"A path returned 202. Retrying...")
-                        await asyncio.sleep(2)
-                        continue
+                        if attempt < max_retries - 1:
+                            delay = min(base_delay * (1.5 ** attempt), max_delay)
+                            print(f"⏳ Path '{path}' returned 202 (processing). Retrying in {delay:.1f}s... (attempt {attempt + 1}/{max_retries})")
+                            await asyncio.sleep(delay)
+                            continue
+                        else:
+                            print(f"⚠️  Max retries reached for '{path}'. Data will be incomplete.")
+                            return dict()
                     elif r_requests.status_code == 200:
                         return r_requests.json()
-        # print(f"There were too many 202s. Data for {path} will be incomplete.")
+        
         print("There were too many 202s. Data for this repository will be incomplete.")
         return dict()
 
@@ -308,7 +322,10 @@ Languages:
 
         next_owned = None
         next_contrib = None
+        page = 0
         while True:
+            page += 1
+            print(f"📦 Fetching repositories (page {page})...")
             raw_results = await self.queries.query(
                 Queries.repos_overview(
                     owned_cursor=next_owned, contrib_cursor=next_contrib
@@ -372,6 +389,7 @@ Languages:
                     "endCursor", next_contrib
                 )
             else:
+                print(f"✅ Fetched {len(self._repos)} repositories")
                 break
 
         # TODO: Improve languages to scale by number of contributions to
@@ -455,6 +473,7 @@ Languages:
             return self._total_contributions
 
         self._total_contributions = 0
+        print("📊 Fetching contribution years...")
         years = (
             (await self.queries.query(Queries.contrib_years()))
             .get("data", {})
@@ -462,6 +481,8 @@ Languages:
             .get("contributionsCollection", {})
             .get("contributionYears", [])
         )
+        print(f"📅 Found contributions across {len(years)} years")
+        print("📈 Calculating total contributions...")
         by_year = (
             (await self.queries.query(Queries.all_contribs(years)))
             .get("data", {})
@@ -472,6 +493,7 @@ Languages:
             self._total_contributions += year.get("contributionCalendar", {}).get(
                 "totalContributions", 0
             )
+        print(f"✅ Total contributions: {self._total_contributions:,}")
         return cast(int, self._total_contributions)
 
     @property
@@ -483,7 +505,12 @@ Languages:
             return self._lines_changed
         additions = 0
         deletions = 0
-        for repo in await self.repos:
+        repos_list = list(await self.repos)
+        total_repos = len(repos_list)
+        print(f"📝 Fetching line changes from {total_repos} repositories...")
+        for idx, repo in enumerate(repos_list, 1):
+            if idx % 5 == 0 or idx == total_repos:
+                print(f"   Progress: {idx}/{total_repos} repositories processed")
             r = await self.queries.query_rest(f"/repos/{repo}/stats/contributors")
             for author_obj in r:
                 # Handle malformed response from the API by skipping this repo
@@ -500,6 +527,7 @@ Languages:
                     deletions += week.get("d", 0)
 
         self._lines_changed = (additions, deletions)
+        print(f"✅ Lines changed: +{additions:,} / -{deletions:,}")
         return self._lines_changed
 
     @property
@@ -512,12 +540,15 @@ Languages:
             return self._views
 
         total = 0
-        for repo in await self.repos:
+        repos_list = list(await self.repos)
+        print(f"👀 Fetching view counts from {len(repos_list)} repositories...")
+        for repo in repos_list:
             r = await self.queries.query_rest(f"/repos/{repo}/traffic/views")
             for view in r.get("views", []):
                 total += view.get("count", 0)
 
         self._views = total
+        print(f"✅ Total views (last 14 days): {total:,}")
         return total
 
 

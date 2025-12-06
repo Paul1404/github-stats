@@ -32,6 +32,7 @@ async def generate_overview(s: Stats) -> None:
     Generate an SVG badge with summary statistics
     :param s: Represents user's GitHub statistics
     """
+    print("\n🎨 Generating overview image...")
     with open("templates/overview.svg", "r") as f:
         output = f.read()
 
@@ -47,6 +48,7 @@ async def generate_overview(s: Stats) -> None:
     generate_output_folder()
     with open("generated/overview.svg", "w") as f:
         f.write(output)
+    print("✅ Overview image generated")
 
 
 async def generate_languages(s: Stats) -> None:
@@ -54,6 +56,7 @@ async def generate_languages(s: Stats) -> None:
     Generate an SVG badge with summary languages used
     :param s: Represents user's GitHub statistics
     """
+    print("\n🎨 Generating languages image...")
     with open("templates/languages.svg", "r") as f:
         output = f.read()
 
@@ -88,6 +91,7 @@ fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path></svg>
     generate_output_folder()
     with open("generated/languages.svg", "w") as f:
         f.write(output)
+    print("✅ Languages image generated")
 
 
 ################################################################################
@@ -99,6 +103,8 @@ async def main() -> None:
     """
     Generate all badges
     """
+    print("🚀 Starting GitHub Stats Generator")
+    print("=" * 50)
     access_token = os.getenv("ACCESS_TOKEN")
     if not access_token:
         # access_token = os.getenv("GITHUB_TOKEN")
@@ -120,6 +126,13 @@ async def main() -> None:
         not not raw_ignore_forked_repos
         and raw_ignore_forked_repos.strip().lower() != "false"
     )
+    print(f"\n⚙️  Configuration:")
+    print(f"   User: {user}")
+    print(f"   Excluded repos: {len(excluded_repos) if excluded_repos else 0}")
+    print(f"   Excluded languages: {len(excluded_langs) if excluded_langs else 0}")
+    print(f"   Ignore forked repos: {ignore_forked_repos}")
+    print()
+    
     async with aiohttp.ClientSession() as session:
         s = Stats(
             user,
@@ -130,6 +143,9 @@ async def main() -> None:
             ignore_forked_repos=ignore_forked_repos,
         )
         await asyncio.gather(generate_languages(s), generate_overview(s))
+    
+    print("\n" + "=" * 50)
+    print("🎉 GitHub Stats generation completed successfully!")
 
 
 if __name__ == "__main__":
