@@ -3,6 +3,9 @@
 import asyncio
 import os
 import re
+from html import escape
+
+from card_layout import language_markup
 
 import aiohttp
 
@@ -36,7 +39,7 @@ async def generate_overview(s: Stats) -> None:
     with open("templates/overview.svg", "r") as f:
         output = f.read()
 
-    output = re.sub("{{ name }}", await s.name, output)
+    output = output.replace("{{ name }}", escape(await s.name))
     output = re.sub("{{ stars }}", f"{await s.stargazers:,}", output)
     output = re.sub("{{ forks }}", f"{await s.forks:,}", output)
     output = re.sub("{{ contributions }}", f"{await s.total_contributions:,}", output)
@@ -60,33 +63,10 @@ async def generate_languages(s: Stats) -> None:
     with open("templates/languages.svg", "r") as f:
         output = f.read()
 
-    progress = ""
-    lang_list = ""
-    sorted_languages = sorted(
-        (await s.languages).items(), reverse=True, key=lambda t: t[1].get("size")
-    )
-    delay_between = 150
-    for i, (lang, data) in enumerate(sorted_languages):
-        color = data.get("color")
-        color = color if color is not None else "#000000"
-        progress += (
-            f'<span style="background-color: {color};'
-            f'width: {data.get("prop", 0):0.3f}%;" '
-            f'class="progress-item"></span>'
-        )
-        lang_list += f"""
-<li style="animation-delay: {i * delay_between}ms;">
-<svg xmlns="http://www.w3.org/2000/svg" class="octicon" style="fill:{color};"
-viewBox="0 0 16 16" version="1.1" width="16" height="16"><path
-fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path></svg>
-<span class="lang">{lang}</span>
-<span class="percent">{data.get("prop", 0):0.2f}%</span>
-</li>
-
-"""
-
-    output = re.sub(r"{{ progress }}", progress, output)
-    output = re.sub(r"{{ lang_list }}", lang_list, output)
+    progress, lang_list, summary = language_markup(await s.languages)
+    output = output.replace("{{ progress }}", progress)
+    output = output.replace("{{ lang_list }}", lang_list)
+    output = output.replace("{{ language_summary }}", summary)
 
     generate_output_folder()
     with open("generated/languages.svg", "w") as f:
