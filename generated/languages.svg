@@ -24,12 +24,12 @@
 <rect x="276.821" y="74" width="30.321" height="10" fill="#3572A5" />
 <rect x="307.142" y="74" width="7.101" height="10" fill="#ff5a03" />
 <rect x="314.243" y="74" width="6.425" height="10" fill="#f1e05a" />
-<rect x="320.668" y="74" width="5.685" height="10" fill="#dea584" />
+<rect x="320.669" y="74" width="5.685" height="10" fill="#dea584" />
 <rect x="326.353" y="74" width="4.639" height="10" fill="#663399" />
 <rect x="330.992" y="74" width="3.811" height="10" fill="#427819" />
-<rect x="334.802" y="74" width="1.993" height="10" fill="#89e051" />
-<rect x="336.795" y="74" width="1.201" height="10" fill="#012456" />
-<rect x="337.996" y="74" width="0.614" height="10" fill="#7355dd" />
+<rect x="334.803" y="74" width="1.993" height="10" fill="#89e051" />
+<rect x="336.796" y="74" width="1.201" height="10" fill="#012456" />
+<rect x="337.997" y="74" width="0.614" height="10" fill="#7355dd" />
 <rect x="338.610" y="74" width="1.390" height="10" fill="#8b949e" /></g>
   <g><title>TypeScript: 52.89%</title><circle cx="23" cy="110" r="3" fill="#3178c6" /><text class="language" x="32" y="114">TypeScript</text><text class="percent" x="172" y="114" text-anchor="end">52.89%</text></g>
 <g><title>HTML: 27.36%</title><circle cx="191" cy="110" r="3" fill="#e34c26" /><text class="language" x="200" y="114">HTML</text><text class="percent" x="340" y="114" text-anchor="end">27.36%</text></g>
