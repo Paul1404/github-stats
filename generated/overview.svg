@@ -1,6 +1,6 @@
 <svg id="gh-dark-mode-only" xmlns="http://www.w3.org/2000/svg" width="360" height="264" viewBox="0 0 360 264" role="img" aria-labelledby="title description">
   <title id="title">GitHub activity</title>
-  <desc id="description">Paul Dresch: 7,304 all-time contributions across 98 repositories, 19 stars, 2 forks, 2,781,066 lines changed, and 103 repository views in the past 14 days.</desc>
+  <desc id="description">Paul Dresch: 7,314 all-time contributions across 98 repositories, 19 stars, 2 forks, 2,795,613 lines changed, and 123 repository views in the past 14 days.</desc>
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     .surface { fill: #ffffff; stroke: #d1d9e0; }
@@ -20,7 +20,7 @@
   <rect class="accent" x="20" y="24" width="4" height="18" rx="2" />
   <text class="heading" x="34" y="38">GitHub activity</text>
   <text class="label" x="20" y="76">All-time contributions</text>
-  <text class="number" x="20" y="113">7,304</text>
+  <text class="number" x="20" y="113">7,314</text>
   <text class="label" x="207" y="76">Repositories contributed to</text>
   <text class="number" x="207" y="113">98</text>
   <path class="rule" d="M20 137H340" />
@@ -28,8 +28,8 @@
   <text class="label" x="20" y="188">Stars</text>
   <text class="detail" x="207" y="169">2</text>
   <text class="label" x="207" y="188">Forks</text>
-  <text class="detail" x="20" y="222">2,781,066</text>
+  <text class="detail" x="20" y="222">2,795,613</text>
   <text class="label" x="20" y="241">Lines changed</text>
-  <text class="detail" x="207" y="222">103</text>
+  <text class="detail" x="207" y="222">123</text>
   <text class="label" x="207" y="241">Views in the past 14 days</text>
 </svg>
