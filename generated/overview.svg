@@ -1,6 +1,6 @@
 <svg id="gh-dark-mode-only" xmlns="http://www.w3.org/2000/svg" width="360" height="264" viewBox="0 0 360 264" role="img" aria-labelledby="title description">
   <title id="title">GitHub activity</title>
-  <desc id="description">Paul Dresch: 7,314 all-time contributions across 98 repositories, 19 stars, 2 forks, 2,795,613 lines changed, and 123 repository views in the past 14 days.</desc>
+  <desc id="description">Paul Dresch: 7,314 all-time contributions across 98 repositories, 19 stars, 2 forks, 2,795,613 lines changed, and 190 repository views in the past 14 days.</desc>
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     .surface { fill: #ffffff; stroke: #d1d9e0; }
@@ -30,6 +30,6 @@
   <text class="label" x="207" y="188">Forks</text>
   <text class="detail" x="20" y="222">2,795,613</text>
   <text class="label" x="20" y="241">Lines changed</text>
-  <text class="detail" x="207" y="222">123</text>
+  <text class="detail" x="207" y="222">190</text>
   <text class="label" x="207" y="241">Views in the past 14 days</text>
 </svg>
