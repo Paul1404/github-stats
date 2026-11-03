@@ -1,6 +1,6 @@
 <svg id="gh-dark-mode-only" xmlns="http://www.w3.org/2000/svg" width="360" height="264" viewBox="0 0 360 264" role="img" aria-labelledby="title description">
   <title id="title">Languages across repositories</title>
-  <desc id="description">Share of repository file sizes. TypeScript 53.21%, HTML 26.88%, Python 9.64%, Astro 2.18%, JavaScript 1.98%, Rust 1.74%, CSS 1.43%, Makefile 1.17%, Shell 0.63%, PowerShell 0.37%, PLpgSQL 0.21%, Other 0.55%</desc>
+  <desc id="description">Share of repository file sizes. TypeScript 53.31%, HTML 26.81%, Python 9.62%, Astro 2.17%, JavaScript 1.97%, Rust 1.74%, CSS 1.42%, Makefile 1.17%, Shell 0.64%, PowerShell 0.37%, PLpgSQL 0.22%, Other 0.55%</desc>
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     .surface { fill: #ffffff; stroke: #d1d9e0; }
@@ -19,28 +19,28 @@
   <rect class="accent" x="20" y="24" width="4" height="18" rx="2" />
   <text class="heading" x="34" y="38">Languages</text>
   <text class="muted" x="20" y="58">Share of repository file sizes</text>
-  <g clip-path="url(#bar)"><rect x="20.000" y="74" width="170.287" height="10" fill="#3178c6" />
-<rect x="190.287" y="74" width="86.007" height="10" fill="#e34c26" />
-<rect x="276.294" y="74" width="30.860" height="10" fill="#3572A5" />
-<rect x="307.154" y="74" width="6.976" height="10" fill="#ff5a03" />
-<rect x="314.130" y="74" width="6.335" height="10" fill="#f1e05a" />
-<rect x="320.465" y="74" width="5.583" height="10" fill="#dea584" />
-<rect x="326.048" y="74" width="4.563" height="10" fill="#663399" />
-<rect x="330.611" y="74" width="3.743" height="10" fill="#427819" />
-<rect x="334.354" y="74" width="2.027" height="10" fill="#89e051" />
-<rect x="336.381" y="74" width="1.180" height="10" fill="#012456" />
-<rect x="337.561" y="74" width="0.664" height="10" fill="#336790" />
-<rect x="338.225" y="74" width="1.775" height="10" fill="#8b949e" /></g>
-  <g><title>TypeScript: 53.21%</title><circle cx="23" cy="110" r="3" fill="#3178c6" /><text class="language" x="32" y="114">TypeScript</text><text class="percent" x="172" y="114" text-anchor="end">53.21%</text></g>
-<g><title>HTML: 26.88%</title><circle cx="191" cy="110" r="3" fill="#e34c26" /><text class="language" x="200" y="114">HTML</text><text class="percent" x="340" y="114" text-anchor="end">26.88%</text></g>
-<g><title>Python: 9.64%</title><circle cx="23" cy="135" r="3" fill="#3572A5" /><text class="language" x="32" y="139">Python</text><text class="percent" x="172" y="139" text-anchor="end">9.64%</text></g>
-<g><title>Astro: 2.18%</title><circle cx="191" cy="135" r="3" fill="#ff5a03" /><text class="language" x="200" y="139">Astro</text><text class="percent" x="340" y="139" text-anchor="end">2.18%</text></g>
-<g><title>JavaScript: 1.98%</title><circle cx="23" cy="160" r="3" fill="#f1e05a" /><text class="language" x="32" y="164">JavaScript</text><text class="percent" x="172" y="164" text-anchor="end">1.98%</text></g>
+  <g clip-path="url(#bar)"><rect x="20.000" y="74" width="170.603" height="10" fill="#3178c6" />
+<rect x="190.603" y="74" width="85.794" height="10" fill="#e34c26" />
+<rect x="276.397" y="74" width="30.784" height="10" fill="#3572A5" />
+<rect x="307.181" y="74" width="6.958" height="10" fill="#ff5a03" />
+<rect x="314.139" y="74" width="6.319" height="10" fill="#f1e05a" />
+<rect x="320.458" y="74" width="5.570" height="10" fill="#dea584" />
+<rect x="326.028" y="74" width="4.552" height="10" fill="#663399" />
+<rect x="330.579" y="74" width="3.734" height="10" fill="#427819" />
+<rect x="334.313" y="74" width="2.039" height="10" fill="#89e051" />
+<rect x="336.352" y="74" width="1.177" height="10" fill="#012456" />
+<rect x="337.529" y="74" width="0.701" height="10" fill="#336790" />
+<rect x="338.230" y="74" width="1.770" height="10" fill="#8b949e" /></g>
+  <g><title>TypeScript: 53.31%</title><circle cx="23" cy="110" r="3" fill="#3178c6" /><text class="language" x="32" y="114">TypeScript</text><text class="percent" x="172" y="114" text-anchor="end">53.31%</text></g>
+<g><title>HTML: 26.81%</title><circle cx="191" cy="110" r="3" fill="#e34c26" /><text class="language" x="200" y="114">HTML</text><text class="percent" x="340" y="114" text-anchor="end">26.81%</text></g>
+<g><title>Python: 9.62%</title><circle cx="23" cy="135" r="3" fill="#3572A5" /><text class="language" x="32" y="139">Python</text><text class="percent" x="172" y="139" text-anchor="end">9.62%</text></g>
+<g><title>Astro: 2.17%</title><circle cx="191" cy="135" r="3" fill="#ff5a03" /><text class="language" x="200" y="139">Astro</text><text class="percent" x="340" y="139" text-anchor="end">2.17%</text></g>
+<g><title>JavaScript: 1.97%</title><circle cx="23" cy="160" r="3" fill="#f1e05a" /><text class="language" x="32" y="164">JavaScript</text><text class="percent" x="172" y="164" text-anchor="end">1.97%</text></g>
 <g><title>Rust: 1.74%</title><circle cx="191" cy="160" r="3" fill="#dea584" /><text class="language" x="200" y="164">Rust</text><text class="percent" x="340" y="164" text-anchor="end">1.74%</text></g>
-<g><title>CSS: 1.43%</title><circle cx="23" cy="185" r="3" fill="#663399" /><text class="language" x="32" y="189">CSS</text><text class="percent" x="172" y="189" text-anchor="end">1.43%</text></g>
+<g><title>CSS: 1.42%</title><circle cx="23" cy="185" r="3" fill="#663399" /><text class="language" x="32" y="189">CSS</text><text class="percent" x="172" y="189" text-anchor="end">1.42%</text></g>
 <g><title>Makefile: 1.17%</title><circle cx="191" cy="185" r="3" fill="#427819" /><text class="language" x="200" y="189">Makefile</text><text class="percent" x="340" y="189" text-anchor="end">1.17%</text></g>
-<g><title>Shell: 0.63%</title><circle cx="23" cy="210" r="3" fill="#89e051" /><text class="language" x="32" y="214">Shell</text><text class="percent" x="172" y="214" text-anchor="end">0.63%</text></g>
+<g><title>Shell: 0.64%</title><circle cx="23" cy="210" r="3" fill="#89e051" /><text class="language" x="32" y="214">Shell</text><text class="percent" x="172" y="214" text-anchor="end">0.64%</text></g>
 <g><title>PowerShell: 0.37%</title><circle cx="191" cy="210" r="3" fill="#012456" /><text class="language" x="200" y="214">PowerShell</text><text class="percent" x="340" y="214" text-anchor="end">0.37%</text></g>
-<g><title>PLpgSQL: 0.21%</title><circle cx="23" cy="235" r="3" fill="#336790" /><text class="language" x="32" y="239">PLpgSQL</text><text class="percent" x="172" y="239" text-anchor="end">0.21%</text></g>
+<g><title>PLpgSQL: 0.22%</title><circle cx="23" cy="235" r="3" fill="#336790" /><text class="language" x="32" y="239">PLpgSQL</text><text class="percent" x="172" y="239" text-anchor="end">0.22%</text></g>
 <g><title>Other: 0.55%</title><circle cx="191" cy="235" r="3" fill="#8b949e" /><text class="language" x="200" y="239">Other</text><text class="percent" x="340" y="239" text-anchor="end">0.55%</text></g>
 </svg>
